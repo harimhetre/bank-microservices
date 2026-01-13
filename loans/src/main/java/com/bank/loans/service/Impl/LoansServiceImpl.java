@@ -5,6 +5,7 @@ import com.bank.loans.dto.LoansDto;
 import com.bank.loans.entity.Loans;
 import com.bank.loans.exception.LoanAlreadyExistException;
 import com.bank.loans.exception.ResourceNotFoundException;
+import com.bank.loans.mapper.LoansMapper;
 import com.bank.loans.repository.LoansRepository;
 import com.bank.loans.service.ILoansService;
 import lombok.AllArgsConstructor;
@@ -44,8 +45,8 @@ public class LoansServiceImpl implements ILoansService {
         loans.setTotalLoan(LoansConstants.NEW_LOAN_LIMIT);
         loans.setAmountPaid(0);
         loans.setOutstandingAmount(LoansConstants.NEW_LOAN_LIMIT);
-        loans.setCreatedAt(LocalDateTime.now());
-        loans.setCreatedBy("Loan Department");
+//        loans.setCreatedAt(LocalDateTime.now());
+//        loans.setCreatedBy("Loan Department");
         return loans;
     }
 
@@ -55,19 +56,25 @@ public class LoansServiceImpl implements ILoansService {
 
         if (fetchedLoan.isPresent()) {
             Loans loans = fetchedLoan.get();
-            return mapToLoansDto(loans, new LoansDto());
+            return LoansMapper.mapToLoansDto(loans, new LoansDto());
         } else {
             throw new ResourceNotFoundException("Loan", "Mobile Number", mobileNumber);
         }
     }
 
-    private LoansDto mapToLoansDto(Loans loans, LoansDto loansDto) {
-        loansDto.setLoanNumber(loans.getLoanNumber());
-        loansDto.setTotalLoan(loans.getTotalLoan());
-        loansDto.setAmountPaid(loans.getAmountPaid());
-        loansDto.setOutstandingAmount(loans.getOutstandingAmount());
-        loansDto.setLoanType(loans.getLoanType());
-        loans.setMobileNumber(loans.getMobileNumber());
-        return loansDto;
+    @Override
+    public void updateLoan(String mobileNumber, LoansDto loansDto) {
+        Loans loans = loansRepository.findByMobileNumber(mobileNumber).orElseThrow(
+                () -> new ResourceNotFoundException("Laon", "Mobile Number", mobileNumber)
+        );
+        loansRepository.save(LoansMapper.mapToLoans(loansDto, loans));
+    }
+
+    @Override
+    public void deleteLoan(String mobileNumber) {
+        Loans loans = loansRepository.findByMobileNumber(mobileNumber).orElseThrow(
+                () -> new ResourceNotFoundException("Laon", "Mobile Number", mobileNumber)
+        );
+        loansRepository.deleteByMobileNumber(mobileNumber);
     }
 }

@@ -1,6 +1,7 @@
 package com.bank.loans.repository;
 
 import com.bank.loans.entity.Loans;
+import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -10,4 +11,7 @@ import java.util.Optional;
 public interface LoansRepository extends JpaRepository<Loans, Long> {
 
     Optional<Loans> findByMobileNumber(String mobileNumber);
+
+    @Transactional
+    void deleteByMobileNumber(String mobileNumber);
 }

@@ -8,4 +8,8 @@ public interface ILoansService {
     boolean create(String mobileNumber);
 
     LoansDto fetchLoanDetails(String mobileNumber);
+
+    void updateLoan(String mobileNumber, LoansDto loansDto);
+
+    void deleteLoan(String mobileNumber);
 }

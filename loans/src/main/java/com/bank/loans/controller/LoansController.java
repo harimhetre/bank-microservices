@@ -30,6 +30,22 @@ public class LoansController {
     public ResponseEntity<LoansDto> fetch(@RequestParam String mobileNumber) {
         LoansDto loansDto = iLoansService.fetchLoanDetails(mobileNumber);
         return ResponseEntity.status(HttpStatus.OK).body(loansDto);
-      }
-
     }
+
+    @PutMapping("/update")
+    public ResponseEntity<ResponseDto>  update(@RequestParam String mobileNumber, @RequestBody LoansDto loansDto) {
+        iLoansService.updateLoan(mobileNumber, loansDto);
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(new ResponseDto(LoansConstants.STATUS_200, LoansConstants.MESSAGE_200));
+    }
+
+    @DeleteMapping("/delete")
+    public ResponseEntity<ResponseDto> delete(@RequestParam String mobileNumber) {
+        iLoansService.deleteLoan(mobileNumber);
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(new ResponseDto(LoansConstants.STATUS_200, LoansConstants.MESSAGE_200));
+    }
+
+}

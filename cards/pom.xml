@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.bank</groupId>
-    <artifactId>loans</artifactId>
+    <artifactId>cards</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>loans</name>
-    <description>Microservice for Loans</description>
+    <name>cards</name>
+    <description>Microservice for cards</description>
     <url/>
     <licenses>
         <license/>

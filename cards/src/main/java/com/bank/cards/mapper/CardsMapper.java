@@ -23,8 +23,6 @@ public class CardsMapper {
         existingCard.setTotalLimit(cardsDto.getTotalLimit());
         existingCard.setAmountUsed(cardsDto.getAmountUsed());
         existingCard.setAvailableAmount(cardsDto.getAvailableAmount());
-        existingCard.setUpdatedBy("Cards-MS");
-        existingCard.setUpdatedAt(LocalDateTime.now());
         return existingCard;
     }
 }

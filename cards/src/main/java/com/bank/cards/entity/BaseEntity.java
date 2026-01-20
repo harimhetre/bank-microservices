@@ -2,12 +2,16 @@ package com.bank.cards.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EntityListeners;
 import jakarta.persistence.MappedSuperclass;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
 
@@ -15,6 +19,7 @@ import java.time.LocalDateTime;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@EntityListeners(AuditingEntityListener.class)
 public class BaseEntity {
 
     @Column(name = "created_at", updatable = false)
@@ -26,8 +31,10 @@ public class BaseEntity {
     private LocalDateTime updatedAt;
 
     @Column(name = "created_by", updatable = false)
+    @CreatedBy
     private String createdBy;
 
     @Column(name = "updated_by", insertable = false)
+    @LastModifiedBy
     private String updatedBy;
 }

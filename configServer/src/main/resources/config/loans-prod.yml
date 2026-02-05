@@ -1,0 +1,12 @@
+build:
+  version: "3.0"
+
+
+loans:
+  message: "Welcome to bank loans related to Prod env"
+  contactDetails:
+    name: "Tatyana - Product Owner"
+    email: "tatyana@americanXpress.com"
+  onCallSupport:
+    - (123) 567-1234
+    - (452) 232-1334

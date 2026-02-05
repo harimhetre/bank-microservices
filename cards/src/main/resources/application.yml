@@ -4,7 +4,8 @@ server:
 spring:
   application:
     name: cards
-
+  profiles:
+    active: "prod"
   datasource:
     url: jdbc:h2:mem:cardsDB
     driverClassName: org.h2.Driver
@@ -18,25 +19,5 @@ spring:
     hibernate:
       ddl-auto: update
     show-sql: true
-
   config:
-    import:
-      - "application_qa.yaml"
-      - "application_prod.yaml"
-
-  profiles:
-    active:
-      - "prod"
-
-
-build:
-  version: "1.0"
-
-cards:
-  message: "Welcome to bank cards related local APIs"
-  contactDetails:
-    name: Hari Mhetre
-    email: hari.mhetre22@gmail.com
-  onCallSupport:
-    - (555) 555-1234
-    - (444) 444-1234
+    import: "configserver:http://localhost:9093/"

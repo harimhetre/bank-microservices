@@ -1,15 +1,8 @@
-spring:
-  config:
-    activate:
-      on-profile: "prod"
-
-
 build:
   version: "3.0"
 
-
-loans:
-  message: "Welcome to bank accounts related to Prod env"
+cards:
+  message: "Welcome to bank cards related to Prod env"
   contactDetails:
     name: "Tatyana - Product Owner"
     email: "tatyana@americanXpress.com"

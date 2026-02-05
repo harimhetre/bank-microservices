@@ -1,0 +1,11 @@
+build:
+  version: "1.0"
+
+accounts:
+  message: "Welcome to bank accounts related local APIs"
+  contactDetails:
+    name: Hari Mhetre
+    email: hari.mhetre22@gmail.com
+  onCallSupport:
+    - (555) 555-1234
+    - (444) 444-1234

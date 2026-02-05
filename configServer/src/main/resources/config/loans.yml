@@ -1,0 +1,12 @@
+build:
+  version: "1.0"
+
+
+loans:
+  message: "Welcome to bank loans related local APIs"
+  contactDetails:
+    name: Hari Mhetre
+    email: hari.mhetre22@gmail.com
+  onCallSupport:
+    - (555) 555-1234
+    - (444) 444-1234

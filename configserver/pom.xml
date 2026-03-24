@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.bank</groupId>
-	<artifactId>configServer</artifactId>
+	<artifactId>configserver</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>configServer</name>
-	<description>ConfigServer for bank microservices</description>
+	<name>configserver</name>
+	<description>Configserver for bank microservices</description>
 	<url/>
 	<licenses>
 		<license/>
@@ -71,6 +71,25 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+            <plugin>
+                <groupId>com.google.cloud.tools</groupId>
+                <artifactId>jib-maven-plugin</artifactId>
+                <version>3.5.1</version>
+
+                <configuration>
+                    <from>
+                        <image>eclipse-temurin:17-jre</image>
+                        <auth>
+                            <username>${env.DOCKER_USERNAME}</username>
+                            <password>${env.DOCKER_TOKEN}</password>
+                        </auth>
+                    </from>
+
+                    <to>
+                        <image>hmhetre/${project.artifactId}:v1</image>
+                    </to>
+                </configuration>
+            </plugin>
 		</plugins>
 	</build>
 

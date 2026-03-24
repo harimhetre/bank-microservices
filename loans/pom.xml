@@ -124,7 +124,7 @@
                     </from>
 
                     <to>
-                        <image>hmhetre/${project.artifactId}:v1</image>
+                        <image>hmhetre/${project.artifactId}:v3</image>
                     </to>
                 </configuration>
             </plugin>

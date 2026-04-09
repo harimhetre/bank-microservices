@@ -76,6 +76,14 @@
 			<artifactId>lombok</artifactId>
 			<optional>true</optional>
 		</dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
+        </dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
@@ -123,7 +131,7 @@
                     </from>
 
                     <to>
-                        <image>hmhetre/${project.artifactId}:v3</image>
+                        <image>hmhetre/${project.artifactId}:v7</image>
                     </to>
                 </configuration>
             </plugin>

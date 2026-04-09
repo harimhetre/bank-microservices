@@ -1,0 +1,35 @@
+spring:
+  application:
+    name: gatewayserver
+  config:
+    import: "optional:configserver:http://localhost:9093/"
+  cloud:
+    gateway:
+      server:
+        webflux:
+          discovery:
+            locator:
+              enabled : true
+#  rabbitmq:
+#    host: localhost
+#    port: 5672
+#    username: guest
+#    password: guest
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    gateway:
+      enabled: unrestricted
+  info:
+    env:
+      enabled: true
+
+info:
+  app:
+    name: "GatewayServer"
+    description: "This is my bank gateway server"
+    version: "1.0.0"

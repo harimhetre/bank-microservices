@@ -1,35 +1,23 @@
 spring:
   application:
-    name: gatewayserver
+    name: "eurekaserver"
   config:
-    import: "optional:configserver:http://localhost:9093/"
-  cloud:
-    gateway:
-      server:
-        webflux:
-          discovery:
-            locator:
-              enabled : true
-#  rabbitmq:
-#    host: localhost
-#    port: 5672
-#    username: guest
-#    password: guest
+    import: "optional:configserver:http://configserver:9093/"
 
 management:
   endpoints:
     web:
       exposure:
         include: "*"
-  endpoint:
-    gateway:
-      enabled: unrestricted
-  info:
-    env:
+  health:
+    liveness-state:
       enabled: true
+    readiness-state:
+      enabled: true
+  endpoint:
+    health:
+      probes:
+        enabled: true
 
-info:
-  app:
-    name: "GatewayServer"
-    description: "This is my bank gateway server"
-    version: "1.0.0"
+
+

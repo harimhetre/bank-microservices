@@ -23,18 +23,23 @@ spring:
     init:
       mode: always
   config:
-    import: "optional:configserver:http://localhost:9093/"
-#  rabbitmq:
-#    host: localhost
-#    port: 5672
-#    username: guest
-#    password: guest
+    import: "optional:configserver:http://configserver:9093/"
+  rabbitmq:
+    host: rabbit
+    port: 5672
+    username: guest
+    password: guest
 
 management:
   endpoints:
     web:
       exposure:
         include: "*"
+  health:
+    liveness-state:
+      enabled: true
+    readiness-state:
+      enabled: true
   info:
     env:
       enabled: true
@@ -42,12 +47,15 @@ management:
   endpoint:
     shutdown:
       enabled: true
+    health:
+      probes:
+        enabled: true
 
 eureka:
   instance:
     preferIpAddress: true
   client:
-    fetchRepository: true
+    fetchRegistry: true
     registerWithEureka: true
     serviceUrl:
       defaultZone: http://eurekaserver:9094/eureka/

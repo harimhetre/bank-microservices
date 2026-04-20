@@ -1,3 +1,26 @@
 spring:
   application:
     name: gatewayserver
+
+  config:
+    import: "optional:configserver:http://configserver:9093/"
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+  endpoint:
+    gateway:
+      enabled: true
+
+  info:
+    env:
+      enabled: true
+
+info:
+  app:
+    name: "GatewayServer"
+    description: "This is my bank gateway server"
+    version: "1.0.0"

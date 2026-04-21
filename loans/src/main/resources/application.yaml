@@ -66,3 +66,10 @@ info:
     name: "Loans"
     description: "This is my bank loans microservice"
     version: "1.0.0"
+
+
+logging:
+  level:
+    com:
+      bank:
+        loans: Debug

@@ -21,6 +21,22 @@ services:
         condition: service_healthy
       eurekaserver:
         condition: service_healthy
+
+  microservice-gatewayserver-config:
+    extends:
+      service: microservice-configserver-config
+    depends_on:
+      accounts:
+        condition: service_healthy
+      cards:
+        condition: service_healthy
+      loans:
+        condition: service_healthy
+      configserver:
+        condition: service_healthy
+      eurekaserver:
+        condition: service_healthy
+
     environment:
       SPRING_CONFIG_IMPORT: "configserver:http://configserver:9093/"
       SPRING_PROFILES_ACTIVE: "prod"

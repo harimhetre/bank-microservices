@@ -11,6 +11,8 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.env.Environment;
@@ -30,6 +32,8 @@ import java.util.Optional;
         description = "This CRUD operation for loans microservices to create, update, fetch and delete loan"
 )
 public class LoansController {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(LoansController.class);
 
     private final ILoansService iLoansService;
 
@@ -72,11 +76,14 @@ public class LoansController {
             description = LoansConstants.MESSAGE_200
     )
     @GetMapping("/fetch")
-    public ResponseEntity<LoansDto> fetch(@RequestParam
-                                              @Pattern(regexp = "(^$|[0-9]{10})", message = "Mobile number should be 10 digit")
-                                              String mobileNumber
+    public ResponseEntity<LoansDto> fetch(
+                  @RequestHeader("X-Correlation-Id") String correlationId,
+                  @RequestParam
+                  @Pattern(regexp = "(^$|[0-9]{10})", message = "Mobile number should be 10 digit")
+                  String mobileNumber
     ) {
         LoansDto loansDto = iLoansService.fetchLoanDetails(mobileNumber);
+        LOGGER.debug("X-Correlation-Id found Loans MS: {}", correlationId);
         return ResponseEntity.status(HttpStatus.OK).body(loansDto);
     }
 

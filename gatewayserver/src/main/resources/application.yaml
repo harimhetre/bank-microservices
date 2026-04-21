@@ -24,3 +24,9 @@ info:
     name: "GatewayServer"
     description: "This is my bank gateway server"
     version: "1.0.0"
+
+logging:
+  level:
+    com:
+      bank:
+        gatewayserver: Debug

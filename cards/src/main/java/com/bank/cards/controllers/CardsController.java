@@ -11,6 +11,8 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.env.Environment;
@@ -27,6 +29,7 @@ import org.springframework.web.bind.annotation.*;
 @Tag(name = "CRUD operation for cards service", description = "This is Create, Fetch, Update, Delete operation for cards service")
 public class CardsController {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(CardsController.class);
 
     private final ICardsService iCardsService;
 
@@ -63,12 +66,13 @@ public class CardsController {
     @GetMapping("/fetch")
     @ApiResponse(responseCode = CardsConstants.STATUS_200, description = CardsConstants.MESSAGE_200)
     public ResponseEntity<CardsDto> fetch (
-
+            @RequestHeader("X-Correlation-Id") String correlationId,
             @RequestParam
             @Pattern(regexp = "(^$|[0-9]{10})", message = "Mobile number should be 10 digit")
             String mobileNumber
     ) {
         CardsDto cardsDto =  iCardsService.fetchCardDetails(mobileNumber);
+        LOGGER.debug("X-Correlation-Id found in Cards MS: {}", correlationId);
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(cardsDto);

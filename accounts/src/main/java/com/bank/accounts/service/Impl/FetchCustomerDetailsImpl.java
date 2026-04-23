@@ -42,10 +42,14 @@ public class FetchCustomerDetailsImpl implements ICustomerDetailsService {
         customerDetailsDto.setAccount(AccountMapper.mapToAccountsDto(accounts, new AccountsDto()));
 
         ResponseEntity<LoansDto> loansDto = loansFeignClient.fetch(correlationId, mobileNumber);
-        customerDetailsDto.setLoansDto(loansDto.getBody());
+        if (loansDto != null) {
+            customerDetailsDto.setLoansDto(loansDto.getBody());
+        }
 
         ResponseEntity<CardsDto> cardsDto = cardsFeignClient.fetch(correlationId, mobileNumber);
-        customerDetailsDto.setCardsDto(cardsDto.getBody());
+        if (cardsDto != null) {
+            customerDetailsDto.setCardsDto(cardsDto.getBody());
+        }
 
         return customerDetailsDto;
     }

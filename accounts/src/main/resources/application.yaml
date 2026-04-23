@@ -35,6 +35,11 @@ spring:
 #    exclude:
 #      - org.springframework.boot.autoconfigure.amqp.RabbitAutoConfiguration
 
+  cloud:
+    openfeign:
+      circuitbreaker:
+        enabled: true
+
 management:
   endpoints:
     web:

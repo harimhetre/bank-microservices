@@ -2,24 +2,23 @@ spring:
   application:
     name: "configServer"
   profiles:
-    #active: native
     active: git
   cloud:
     config:
       server:
-#        native:
-#          search-locations: "classpath:/config"
          git:
            uri: "https://github.com/harimhetre/bank-microservices-config.git"
            default-label: dev
            timeout: 5
            force-pull: true
            clone-on-start: true
-    rabbitmq:
-      host: rabbit
-      port: 5672
-      username: guest
-      password: guest
+
+# Spring cloud bus config
+#    rabbitmq:
+#      host: rabbit
+#      port: 5672
+#      username: guest
+#      password: guest
 
 management:
   endpoints:
